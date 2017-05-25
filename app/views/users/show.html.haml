@@ -3,7 +3,7 @@
   %aside.span4
     %section
       %h1
-        = image_tag @user.image.to_s
+        = gravatar_for @user
         = @user.name
     %section
       = render 'shared/stats'
