@@ -16,6 +16,6 @@
       = f.label :image, "ユーザー画像"
       = f.file_field :image
       = f.submit "保存する", class: "btn btn-large btn-primary"
-    = form_tag(user_path, class: 'dropzone', id: 'upload-dropzone') do
+    = form_tag(upload_image_user_path, class: 'dropzone', id: 'upload-dropzone') do
       .fallback
         file_field_tag 'attachment[file]'
