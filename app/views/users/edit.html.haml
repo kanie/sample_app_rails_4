@@ -2,9 +2,11 @@
 %h1 Update your profile
 .row
   .span6.offset3
+    .img_dropzone
+      ここにファイルをドロップ
     = form_for(@user) do |f|
       = render 'shared/error_messages', object: f.object
-      = image_tag @user.image.to_s
+      = image_tag @user.image.to_s, { class: "profile_image" }
       = f.label :name, "ユーザー名"
       = f.text_field :name
       = f.label :email, "メールアドレス"
@@ -13,9 +15,4 @@
       = f.password_field :password
       = f.label :password_confirmation, "パスワード（確認用）"
       = f.password_field :password_confirmation
-      = f.label :image, "ユーザー画像"
-      = f.file_field :image
       = f.submit "保存する", class: "btn btn-large btn-primary"
-    = form_tag(upload_image_user_path, class: "dropzone", id: "upload-dropzone") do
-      .fallback
-        file_field_tag 'user[image]'
