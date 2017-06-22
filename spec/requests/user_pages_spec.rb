@@ -169,11 +169,10 @@ describe "User pages" do
     describe "page" do
       it { should have_content("Update your profile") }
       it { should have_title("Edit user") }
-      it { should have_link('change', href: 'http://gravatar.com/emails') }
     end
 
     describe "with invalid information" do
-      before { click_button "Save changes" }
+      before { click_button "保存する" }
 
       it { should have_content('error') }
     end
@@ -182,11 +181,11 @@ describe "User pages" do
       let(:new_name)  { "New Name" }
       let(:new_email) { "new@example.com" }
       before do
-        fill_in "Name",             with: new_name
-        fill_in "Email",            with: new_email
-        fill_in "Password",         with: user.password
-        fill_in "Confirm Password", with: user.password
-        click_button "Save changes"
+        fill_in "ユーザー名",             with: new_name
+        fill_in "メールアドレス",            with: new_email
+        fill_in "パスワード",         with: user.password
+        fill_in "パスワード（確認用）", with: user.password
+        click_button "保存する"
       end
 
       it { should have_title(new_name) }
