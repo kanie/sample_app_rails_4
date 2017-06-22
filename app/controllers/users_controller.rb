@@ -46,6 +46,12 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def upload_image
+    @user = User.find(params[:id])
+    @user.update_attribute(:image, params[:file])
+    render status: 200, json: @user, nothing: true
+  end
+
   def following
     @title = "Following"
     @user = User.find(params[:id])

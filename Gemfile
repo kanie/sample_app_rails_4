@@ -14,6 +14,8 @@ gem 'carrierwave'
 gem 'rmagick'
 gem 'haml-rails'
 gem 'erb2haml'
+gem 'dropzonejs-rails'
+gem 'jquery-turbolinks'
 
 group :development, :test do
   gem 'sqlite3'
