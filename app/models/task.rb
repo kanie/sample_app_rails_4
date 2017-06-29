@@ -20,6 +20,16 @@ class Task < ActiveRecord::Base
     end
   end
 
+  DISPLAY_STATUS = {
+    not_started: "未着手",
+    working: "仕掛中",
+    done: "完了"
+  }
+
+  def status_for_display
+    DISPLAY_STATUS[self.status.to_sym]
+  end
+
   # Returns tasks from the users being followed by the given user.
   def self.from_users_followed_by(user)
     followed_user_ids = "SELECT followed_id FROM relationships
