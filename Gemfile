@@ -16,6 +16,7 @@ gem 'haml-rails'
 gem 'erb2haml'
 gem 'dropzonejs-rails'
 gem 'jquery-turbolinks'
+gem 'aasm'
 
 group :development, :test do
   gem 'sqlite3'
