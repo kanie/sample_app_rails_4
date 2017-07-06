@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   def create
     @task = current_user.tasks.build(task_params)
     if @task.save
-      flash[:success] = "task created!"
+      flash[:success] = "作成しました"
       redirect_to root_url
     else
       @feed_items = []
@@ -16,6 +16,30 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     redirect_to root_url
+  end
+
+  def start
+    @task = current_user.tasks.find_by(id: params[:task_id])
+    @task.start
+    if @task.save
+      flash[:success] = "開始しました"
+      redirect_to root_url
+    else
+      @feed_items = []
+      render 'static_pages/home'
+    end
+  end
+
+  def finish
+    @task = current_user.tasks.find_by(id: params[:task_id])
+    @task.finish
+    if @task.save
+      flash[:success] = "完了しました"
+      redirect_to root_url
+    else
+      @feed_items = []
+      render 'static_pages/home'
+    end
   end
 
   private
