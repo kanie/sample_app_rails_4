@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import "honoka";
 
 /* mixins, variables, etc. */
 
@@ -14,10 +15,12 @@ $grayMediumLight: #eaeaea;
 
 html {
   overflow-y: scroll;
+  height: 100%;
 }
 
 body {
-  padding-top: 60px;
+  padding-top: 87px;
+  height: 100%;
 }
 
 section {
