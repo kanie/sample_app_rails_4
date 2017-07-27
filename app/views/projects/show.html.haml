@@ -1,0 +1,27 @@
+%p
+  %b Name:
+  = @project.name
+= link_to 'Edit', edit_project_path(@project)
+\|
+= link_to 'Back', projects_path
+
+= form_for @task, url: project_tasks_path(@project) do |f|
+  .field
+    = f.label :content
+    = f.text_field :content
+  .actions
+    = f.submit '作成する', {class: "btn btn-large btn-primary"}
+
+
+- if @feed_items.any?
+  .table-responsive
+    %table.table.table-striped.table-hover
+      %tr
+        %th
+          = "内容"
+        %th
+          = "ステータス"
+        %th
+          = "削除"
+      = render partial: 'shared/feed_item', collection: @feed_items
+  = will_paginate @feed_items

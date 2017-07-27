@@ -1,16 +1,12 @@
-%li{:id => "#{feed_item.id}"}
+%tr
   = link_to gravatar_for(feed_item.user), feed_item.user
-  %span.user
-    = link_to feed_item.user.name, feed_item.user
-  %div= feed_item.status_for_display
-  %span.content= feed_item.content
-  %span.timestamp
-    Posted #{time_ago_in_words(feed_item.created_at)} ago.
-  - if current_user?(feed_item.user)
+  %td
+    = feed_item.content
+  %td
+    = feed_item.status_for_display
     - if feed_item.not_started?
-      = link_to "開始", task_start_path(feed_item), method: :start
+      = link_to "開始", project_task_start_path(feed_item, @project), method: :start, class: "btn btn-primary btn-sm"
     - if feed_item.working?
-      = link_to "完了", task_finish_path(feed_item), method: :finish
-    = link_to "削除", feed_item, method: :delete, |
-      data: { confirm: "You sure?" },               |
-      title: feed_item.content                      |
+      = link_to "完了", project_task_finish_path(feed_item, @project), method: :finish, class: "btn btn-primary btn-sm"
+  %td
+    = link_to "削除", project_task_path(feed_item, @project), method: :delete, data: { confirm: "You sure?" }, title: feed_item.content, class: "btn btn-primary btn-sm"
