@@ -17,15 +17,18 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to root_url
+    @project = Project.find(params[:project_id])
+    flash[:success] = "削除"
+    redirect_to project_path(@project)
   end
 
   def start
-    @task = current_user.tasks.find_by(id: params[:task_id])
+    @project = Project.find(params[:project_id])
+    @task = Task.find_by(id: params[:task_id])
     @task.start
     if @task.save
       flash[:success] = "開始しました"
-      redirect_to root_url
+      redirect_to project_path(@project)
     else
       @feed_items = []
       render 'static_pages/home'
@@ -33,11 +36,12 @@ class TasksController < ApplicationController
   end
 
   def finish
-    @task = current_user.tasks.find_by(id: params[:task_id])
+    @project = Project.find(params[:project_id])
+    @task = Task.find_by(id: params[:task_id])
     @task.finish
     if @task.save
       flash[:success] = "完了しました"
-      redirect_to root_url
+      redirect_to project_path(@project)
     else
       @feed_items = []
       render 'static_pages/home'
@@ -47,7 +51,7 @@ class TasksController < ApplicationController
   private
 
     def task_params
-      params.require(:task).permit(:content)
+      params.require(:task).permit(:content, :id, :status)
     end
 
     def correct_user
