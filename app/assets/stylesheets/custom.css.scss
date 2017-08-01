@@ -247,3 +247,23 @@ aside {
     margin-bottom: 5px;
   }
 }
+
+.table_container {
+   position:relative;
+}
+
+.table_header {
+   width: 40%;
+   position: absolute;
+   left: 0px;
+   top: 0px;
+}
+
+.table_data {
+   width:60%;
+   position: absolute;
+   left:40%;
+   top:0;
+   overflow-x:scroll;
+   display: block;
+}
