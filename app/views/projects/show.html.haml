@@ -5,13 +5,6 @@
 \|
 = link_to 'Back', projects_path
 
-= form_for @task, url: project_tasks_path(@project) do |f|
-  .field
-    = f.label :content
-    = f.text_field :content
-  .actions
-    = f.submit '作成する', {class: "btn btn-large btn-primary"}
-
 - if @feed_items.any?
   .joined_table_container
     %table.table.table-bordered.joined_header_table
@@ -42,51 +35,58 @@
             %td
               = link_to "済み", project_task_finish_path(@project, feed_item), method: :finish, class: "btn btn-primary btn-sm"
               = link_to "削除", project_task_path(@project, feed_item), method: :delete, data: { confirm: "本当に削除しますか？" }, title: feed_item.content
+      %tr.joined_table_add
+        = form_for @task, url: project_tasks_path(@project) do |f|
+          %td
+            = f.text_field :content
+          %td
+            .actions
+              = f.submit '追加', { class: "btn btn-primary btn-sm" }
     %table.table.table-bordered.joined_data_table
       %thead
         %tr
           %th
-            = "ぬ"
+            = "月"
           %th
-            = "ぬ"
+            = "火"
           %th
-            = "ぬ"
+            = "水"
           %th
-            = "ぬ"
+            = "木"
           %th
-            = "ぬ"
+            = "金"
           %th
-            = "ぬ"
+            = "月"
           %th
-            = "ぬ"
+            = "火"
           %th
-            = "ぬ"
+            = "水"
           %th
-            = "ぬ"
+            = "木"
           %th
-            = "ぬ"
+            = "金"
           %th
-            = "ぬ"
+            = "月"
           %th
-            = "ぬ"
+            = "火"
           %th
-            = "ぬ"
+            = "水"
           %th
-            = "ぬ"
+            = "木"
           %th
-            = "ぬ"
+            = "金"
           %th
-            = "ぬ"
+            = "月"
           %th
-            = "ぬ"
+            = "火"
           %th
-            = "ぬ"
+            = "水"
           %th
-            = "ぬ"
+            = "木"
           %th
-            = "ぬ"
+            = "金"
           %th
-            = "ぬ"
+            = "月"
       - @feed_items.each do |feed_item|
         - if feed_item.not_started?
           %tr
@@ -220,4 +220,25 @@
               = "ぬ"
             %td
               = link_to "削除", project_task_path(@project, feed_item), method: :delete, data: { confirm: "本当に削除しますか？" }, title: feed_item.content, class: "btn btn-primary btn-sm"
-  = will_paginate @feed_items
+      %tr.joined_table_add
+        %td
+        %td
+        %td
+        %td
+        %td
+        %td
+        %td
+        %td
+        %td
+        %td
+        %td
+        %td
+        %td
+        %td
+        %td
+        %td
+        %td
+        %td
+        %td
+        %td
+        %td

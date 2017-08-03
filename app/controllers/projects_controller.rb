@@ -11,7 +11,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     if signed_in?
-      @feed_items = @project.tasks.paginate(page: params[:page])
+      @feed_items = @project.tasks.reverse
       @task = Task.new(project_id: @project.id)
     end
   end
