@@ -1,4 +1,4 @@
-@import "bootstrap";
+/*@import "bootstrap";*/
 @import "honoka";
 
 /* mixins, variables, etc. */
@@ -57,7 +57,7 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: $grayLight;
+  /*color: $grayLight;*/
 }
 
 p {
@@ -86,7 +86,7 @@ p {
 
 /* footer */
 
-footer {
+/*footer {
   margin-top: 45px;
   padding-top: 5px;
   border-top: 1px solid $grayMediumLight;
@@ -108,7 +108,7 @@ footer {
       margin-left: 10px;
     }
   }
-}
+}*/
 
 /* miscellaneous */
 
@@ -122,7 +122,7 @@ footer {
 
 /* sidebar */
 
-aside {
+/*aside {
   section {
     padding: 10px 0;
     border-top: 1px solid $grayLighter;
@@ -143,14 +143,14 @@ aside {
       margin-top: 0px;
     }
   }
-}
+}*/
 
 .gravatar {
   float: left;
   margin-right: 10px;
 }
 
-.stats {
+/*.stats {
   overflow: auto;
   a {
     float: left;
@@ -169,7 +169,7 @@ aside {
   strong {
     display: block;
   }
-}
+}*/
 
 .user_avatars {
   overflow: auto;
@@ -200,14 +200,14 @@ input {
   }
 }
 
-.field_with_errors {
+/*.field_with_errors {
   @extend .control-group;
   @extend .error;
 }
-
+*/
 /* Users index */
 
-.users {
+/*.users {
   list-style: none;
   margin: 0;
   li {
@@ -218,7 +218,7 @@ input {
       border-bottom: 1px solid $grayLighter;
     }
   }
-}
+}*/
 
 /* tasks */
 
@@ -234,9 +234,9 @@ input {
 .content {
   display: block;
 }
-.timestamp {
+/*.timestamp {
   color: $grayLight;
-}
+}*/
 .gravatar {
   float: left;
   margin-right: 10px;
@@ -248,22 +248,35 @@ aside {
   }
 }
 
-.table_container {
-   position:relative;
+.joined_table_container {
+    position:relative;
 }
 
-.table_header {
-   width: 40%;
-   position: absolute;
-   left: 0px;
-   top: 0px;
+.joined_header_table {
+  width: 40%;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  thead {
+    background-color: rgba(34, 34, 34, .8);
+    color: #eee;
+  }
+  th {
+    text-align: center;
+  }
 }
 
-.table_data {
-   width:60%;
-   position: absolute;
-   left:40%;
-   top:0;
-   overflow-x:scroll;
-   display: block;
+.joined_data_table {
+  width:60%;
+  position: absolute;
+  left:40%;
+  top:0;
+  overflow-x:scroll;
+  display: block;
+  border: 0px solid #ddd;
+  thead {
+    border-top: 1px solid #ddd;
+    background-color: rgba(34, 34, 34, .8);
+    color: #eee;
+  }
 }

@@ -13,112 +13,211 @@
     = f.submit '作成する', {class: "btn btn-large btn-primary"}
 
 - if @feed_items.any?
-  .table_container
-    %table.table.table-striped.table-bordered.table_header
-      %tr
-        %th
-          = "内容"
-        %th
-          = "ステータス"
-        %th
-      - @feed_items.each do |feed_item|
+  .joined_table_container
+    %table.table.table-bordered.joined_header_table
+      %thead
         %tr
-          %td
-            = feed_item.content
-          %td
-            = feed_item.status_for_display
-            - if feed_item.not_started?
+          %th
+            = "内容"
+          %th
+      - @feed_items.each do |feed_item|
+        - if feed_item.not_started?
+          %tr
+            %td
+              = feed_item.content
+            %td
               = link_to "開始", project_task_start_path(@project, feed_item), method: :start, class: "btn btn-primary btn-sm"
-            - if feed_item.working?
+              = link_to "削除", project_task_path(@project, feed_item), method: :delete, data: { confirm: "本当に削除しますか？" }, title: feed_item.content
+        - elsif feed_item.working?
+          %tr.success
+            %td
+              = feed_item.content
+            %td
               = link_to "完了", project_task_finish_path(@project, feed_item), method: :finish, class: "btn btn-primary btn-sm"
-          %td
-            = link_to "削除", project_task_path(@project, feed_item), method: :delete, data: { confirm: "本当に削除しますか？" }, title: feed_item.content, class: "btn btn-primary btn-sm"
-    %table.table.table-striped.table-bordered.table_data
-      %tr
-        %th
-          = "ぬ"
-        %th
-          = "ぬ"
-        %th
-          = "ぬ"
-        %th
-          = "ぬ"
-        %th
-          = "ぬ"
-        %th
-          = "ぬ"
-        %th
-          = "ぬ"
-        %th
-          = "ぬ"
-        %th
-          = "ぬ"
-        %th
-          = "ぬ"
-        %th
-          = "ぬ"
-        %th
-          = "ぬ"
-        %th
-          = "ぬ"
-        %th
-          = "ぬ"
-        %th
-          = "ぬ"
-        %th
-          = "ぬ"
-        %th
-          = "ぬ"
-        %th
-          = "ぬ"
-        %th
-          = "ぬ"
-        %th
-          = "ぬ"
-        %th
-          = "ぬ"
-      - @feed_items.each do |feed_item|
+              = link_to "削除", project_task_path(@project, feed_item), method: :delete, data: { confirm: "本当に削除しますか？" }, title: feed_item.content
+        - else
+          %tr.active
+            %td
+              = feed_item.content
+            %td
+              = link_to "済み", project_task_finish_path(@project, feed_item), method: :finish, class: "btn btn-primary btn-sm"
+              = link_to "削除", project_task_path(@project, feed_item), method: :delete, data: { confirm: "本当に削除しますか？" }, title: feed_item.content
+    %table.table.table-bordered.joined_data_table
+      %thead
         %tr
-          %td
+          %th
             = "ぬ"
-          %td
+          %th
             = "ぬ"
-          %td
+          %th
             = "ぬ"
-          %td
+          %th
             = "ぬ"
-          %td
+          %th
             = "ぬ"
-          %td
+          %th
             = "ぬ"
-          %td
+          %th
             = "ぬ"
-          %td
+          %th
             = "ぬ"
-          %td
+          %th
             = "ぬ"
-          %td
+          %th
             = "ぬ"
-          %td
+          %th
             = "ぬ"
-          %td
+          %th
             = "ぬ"
-          %td
+          %th
             = "ぬ"
-          %td
+          %th
             = "ぬ"
-          %td
+          %th
             = "ぬ"
-          %td
+          %th
             = "ぬ"
-          %td
+          %th
             = "ぬ"
-          %td
+          %th
             = "ぬ"
-          %td
+          %th
             = "ぬ"
-          %td
+          %th
             = "ぬ"
-          %td
-            = link_to "削除", project_task_path(@project, feed_item), method: :delete, data: { confirm: "本当に削除しますか？" }, title: feed_item.content, class: "btn btn-primary btn-sm"
+          %th
+            = "ぬ"
+      - @feed_items.each do |feed_item|
+        - if feed_item.not_started?
+          %tr
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = link_to "削除", project_task_path(@project, feed_item), method: :delete, data: { confirm: "本当に削除しますか？" }, title: feed_item.content, class: "btn btn-primary btn-sm"
+        - elsif feed_item.working?
+          %tr.success
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = link_to "削除", project_task_path(@project, feed_item), method: :delete, data: { confirm: "本当に削除しますか？" }, title: feed_item.content, class: "btn btn-primary btn-sm"
+        - else
+          %tr.active
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = "ぬ"
+            %td
+              = link_to "削除", project_task_path(@project, feed_item), method: :delete, data: { confirm: "本当に削除しますか？" }, title: feed_item.content, class: "btn btn-primary btn-sm"
   = will_paginate @feed_items
