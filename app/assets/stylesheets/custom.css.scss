@@ -248,39 +248,18 @@ aside {
   }
 }
 
-.joined_table_container {
-    position:relative;
+.scroll_range {
+  overflow: auto;
+  width: 500px;
 }
 
-.joined_header_table {
-  width: 40%;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  thead {
-    background-color: rgba(34, 34, 34, .8);
-    color: #eee;
-  }
+.table_fixed{
+  width: 700px;
   th {
-    text-align: center;
+    width: 100px;
   }
 }
 
-.joined_data_table {
-  width:60%;
-  position: absolute;
-  left:40%;
-  top:0;
-  overflow-x:scroll;
-  display: block;
-  border: 0px solid #ddd;
-  thead {
-    border-top: 1px solid #ddd;
-    background-color: rgba(34, 34, 34, .8);
-    color: #eee;
-  }
-}
-
-.joined_table_add {
+.task_table_add {
   height: 70px;
 }
