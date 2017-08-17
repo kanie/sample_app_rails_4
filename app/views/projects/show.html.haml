@@ -13,45 +13,10 @@
           %th
             = "内容"
           %th
-            = "月"
-          %th
-            = "火"
-          %th
-            = "水"
-          %th
-            = "木"
-          %th
-            = "金"
-          %th
-            = "月"
-          %th
-            = "火"
-          %th
-            = "水"
-          %th
-            = "木"
-          %th
-            = "金"
-          %th
-            = "月"
-          %th
-            = "火"
-          %th
-            = "水"
-          %th
-            = "木"
-          %th
-            = "金"
-          %th
-            = "月"
-          %th
-            = "火"
-          %th
-            = "水"
-          %th
-            = "木"
-          %th
-            = "金"
+            = "ステータス"
+          - (@project.start_date..(@project.start_date + 18)).select{ |d| (1..5).include?(d.wday) }.each do |d|
+            %th
+              = d.strftime("%d")
         - @feed_items.each do |feed_item|
           - if feed_item.not_started?
             %tr

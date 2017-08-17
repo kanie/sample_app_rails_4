@@ -255,8 +255,12 @@ aside {
 
 .table_fixed{
   width: 700px;
-  th {
+  table-layout: fixed;
+  th:nth-child(1):nth-child(2) {
     width: 100px;
+  }
+  th:not(:nth-child(1):nth-child(2)) {
+    width: 40px;
   }
 }
 
