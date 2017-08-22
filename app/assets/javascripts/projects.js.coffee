@@ -2,4 +2,9 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ ->
-  FixedMidashi.create()
+  $('#task_table').tablefix {
+    width: 800
+    height: 500
+    fixRows: 1
+    fixCols: 3
+  }

@@ -15,6 +15,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require _honoka
-//= require fixed_midashi
+//= require jquery.tablefix.min
 //= require_tree .
 //= require dropzone

@@ -7,7 +7,7 @@
 
 - if @feed_items.any?
   .scroll_range
-    %table.table.table-bordered.table_fixed{ _fixedhead: "rows:1; cols:1;"}
+    %table.table.table-bordered{id: "task_table"}
       %thead
         %tr
           %th
@@ -29,14 +29,6 @@
               %td
                 = link_to "開始", project_task_start_path(@project, feed_item), method: :start, class: "btn btn-primary btn-sm"
                 = link_to "削除", project_task_path(@project, feed_item), method: :delete, data: { confirm: "本当に削除しますか？" }, title: feed_item.content
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
               %td
                 = "ぬ"
               %td
@@ -106,14 +98,6 @@
                 = "ぬ"
               %td
                 = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
           - else
             %tr.active
               %td
@@ -123,14 +107,6 @@
               %td
                 = link_to "済み", project_task_finish_path(@project, feed_item), method: :finish, class: "btn btn-primary btn-sm"
                 = link_to "削除", project_task_path(@project, feed_item), method: :delete, data: { confirm: "本当に削除しますか？" }, title: feed_item.content
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
               %td
                 = "ぬ"
               %td
@@ -188,3 +164,4 @@
             %td
             %td
             %td
+    }

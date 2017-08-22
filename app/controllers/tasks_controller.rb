@@ -7,7 +7,7 @@ class TasksController < ApplicationController
     @task = current_user.tasks.build(task_params)
     @task.project_id = @project.id
     if @task.save
-      flash[:success] = "作成しました"
+      flash[:success] = "追加しました"
       redirect_to project_path(@project)
     else
       @feed_items = []
