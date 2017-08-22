@@ -1,6 +1,6 @@
 SampleApp::Application.routes.draw do
   resources :projects do
-    resources :tasks, only: [:index, :create, :destroy] do
+    resources :tasks do
       post 'start'
       post 'finish'
     end

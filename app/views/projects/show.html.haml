@@ -13,6 +13,8 @@
           %th
             = "内容"
           %th
+            = "予定"
+          %th
             = "ステータス"
           - (@project.start_date..(@project.start_date + 18)).select{ |d| (1..5).include?(d.wday) }.each do |d|
             %th
@@ -21,7 +23,9 @@
           - if feed_item.not_started?
             %tr
               %td
-                = feed_item.content
+                = link_to feed_item.content, edit_project_task_path(@project, feed_item)
+              %td
+                = feed_item.planed_time
               %td
                 = link_to "開始", project_task_start_path(@project, feed_item), method: :start, class: "btn btn-primary btn-sm"
                 = link_to "削除", project_task_path(@project, feed_item), method: :delete, data: { confirm: "本当に削除しますか？" }, title: feed_item.content
@@ -66,7 +70,9 @@
           - elsif feed_item.working?
             %tr.success
               %td
-                = feed_item.content
+                = link_to feed_item.content, edit_project_task_path(@project, feed_item)
+              %td
+                = feed_item.planed_time
               %td
                 = link_to "完了", project_task_finish_path(@project, feed_item), method: :finish, class: "btn btn-primary btn-sm"
                 = link_to "削除", project_task_path(@project, feed_item), method: :delete, data: { confirm: "本当に削除しますか？" }, title: feed_item.content
@@ -111,7 +117,9 @@
           - else
             %tr.active
               %td
-                = feed_item.content
+                = link_to feed_item.content, edit_project_task_path(@project, feed_item)
+              %td
+                = feed_item.planed_time
               %td
                 = link_to "済み", project_task_finish_path(@project, feed_item), method: :finish, class: "btn btn-primary btn-sm"
                 = link_to "削除", project_task_path(@project, feed_item), method: :delete, data: { confirm: "本当に削除しますか？" }, title: feed_item.content

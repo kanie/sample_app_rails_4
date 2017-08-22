@@ -1,0 +1,15 @@
+= form_for @task, url: project_task_path(project_id: @project) do |f|
+  - if @task.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@task.errors.count, "error")} prohibited this project from being saved:"
+      %ul
+        - @task.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :content
+    = f.text_field :content
+    = f.label :planed_time
+    = f.number_field :planed_time
+  .actions
+    = f.submit '作成する', {class: "btn btn-large btn-primary"}
