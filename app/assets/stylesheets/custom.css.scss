@@ -250,9 +250,24 @@ aside {
 
 .scroll_range {
   overflow: auto;
-  width: 800px;
 }
 
-.task_table_add {
-  height: 70px;
+#task_table {
+  th {
+    background-color: rgba(34, 34, 34, .8);
+    color: #eee;
+    text-align: center;
+  }
+  .content {
+    min-width: 140px;
+  }
+  .planed_time {
+    min-width: 50px;
+  }
+  .status {
+    min-width: 50px;
+  }
+  .day {
+    min-width: 50px;
+  }
 }

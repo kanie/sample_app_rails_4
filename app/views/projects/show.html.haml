@@ -10,137 +10,63 @@
     %table.table.table-bordered{id: "task_table"}
       %thead
         %tr
-          %th
+          %th.content
             = "内容"
-          %th
+          %th.planed_time
             = "予定"
-          %th
-            = "ステータス"
-          - (@project.start_date..(@project.start_date + 18)).select{ |d| (1..5).include?(d.wday) }.each do |d|
-            %th
+          %th.status
+          - (@project.start_date..(@project.start_date + 60)).select{ |d| (1..5).include?(d.wday) }.each do |d|
+            %th.day
               = d.strftime("%d")
         - @feed_items.each do |feed_item|
-          - if feed_item.not_started?
-            %tr
-              %td
-                = link_to feed_item.content, edit_project_task_path(@project, feed_item)
-              %td
-                = feed_item.planed_time
-              %td
+          %tr{ class: "#{'success' if feed_item.working? }" "#{'active' if feed_item.done? }" }
+            %td
+              = link_to feed_item.content, edit_project_task_path(@project, feed_item)
+            %td
+              = feed_item.planed_time
+            %td
+              -if feed_item.not_started?
                 = link_to "開始", project_task_start_path(@project, feed_item), method: :start, class: "btn btn-primary btn-sm"
-                = link_to "削除", project_task_path(@project, feed_item), method: :delete, data: { confirm: "本当に削除しますか？" }, title: feed_item.content
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-          - elsif feed_item.working?
-            %tr.success
-              %td
-                = link_to feed_item.content, edit_project_task_path(@project, feed_item)
-              %td
-                = feed_item.planed_time
-              %td
+              -elsif feed_item.working?
                 = link_to "完了", project_task_finish_path(@project, feed_item), method: :finish, class: "btn btn-primary btn-sm"
-                = link_to "削除", project_task_path(@project, feed_item), method: :delete, data: { confirm: "本当に削除しますか？" }, title: feed_item.content
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-          - else
-            %tr.active
-              %td
-                = link_to feed_item.content, edit_project_task_path(@project, feed_item)
-              %td
-                = feed_item.planed_time
-              %td
+              -else
                 = link_to "済み", project_task_finish_path(@project, feed_item), method: :finish, class: "btn btn-primary btn-sm"
-                = link_to "削除", project_task_path(@project, feed_item), method: :delete, data: { confirm: "本当に削除しますか？" }, title: feed_item.content
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-              %td
-                = "ぬ"
-        %tr.task_table_add
+            %td
+              = "120"
+            %td
+              = "120"
+            %td
+              = "120"
+            %td
+              = "120"
+            %td
+              = "120"
+            %td
+              = "120"
+            %td
+              = "120"
+            %td
+              = "120"
+            %td
+              = "120"
+            %td
+              = "120"
+            %td
+              = "120"
+            %td
+              = "120"
+            %td
+              = "120"
+            %td
+              = "120"
+            %td
+              = "120"
+        %tr
           = form_for @task, url: project_tasks_path(@project) do |f|
             %td
               = f.text_field :content
+            %td
+              = f.number_field :planed_time
             %td
               .actions
                 = f.submit '追加', { class: "btn btn-primary btn-sm" }
@@ -160,8 +86,3 @@
             %td
             %td
             %td
-            %td
-            %td
-            %td
-            %td
-    }
