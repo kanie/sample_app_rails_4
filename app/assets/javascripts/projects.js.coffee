@@ -4,7 +4,7 @@
 $ ->
   $('#task_table').tablefix {
     height: 740
-    width: 1000
+    width: 1200
     fixRows: 1
     fixCols: 3
   }

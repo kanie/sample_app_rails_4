@@ -3,7 +3,7 @@ class Task < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :project
-  default_scope -> { order('created_at DESC') }
+  has_many :dailies, dependent: :destroy
   validates :content, presence: true, length: { maximum: 140 }
   validates :user_id, presence: true
 

@@ -31,36 +31,10 @@
                 = link_to "完了", project_task_finish_path(@project, feed_item), method: :finish, class: "btn btn-primary btn-sm"
               -else
                 = link_to "済み", project_task_finish_path(@project, feed_item), method: :finish, class: "btn btn-primary btn-sm"
-            %td
-              = "120"
-            %td
-              = "120"
-            %td
-              = "120"
-            %td
-              = "120"
-            %td
-              = "120"
-            %td
-              = "120"
-            %td
-              = "120"
-            %td
-              = "120"
-            %td
-              = "120"
-            %td
-              = "120"
-            %td
-              = "120"
-            %td
-              = "120"
-            %td
-              = "120"
-            %td
-              = "120"
-            %td
-              = "120"
+            - (@project.start_date..(@project.start_date + 60)).select{ |d| (1..5).include?(d.wday) }.each do |d|
+              %td
+                = feed_item.dailies.find_by(the_date: d).try(:planed_time)
+                = feed_item.dailies.find_by(the_date: d).try(:actual_time)
         %tr
           = form_for @task, url: project_tasks_path(@project) do |f|
             %td
