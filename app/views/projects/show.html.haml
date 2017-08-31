@@ -20,11 +20,11 @@
               = d.strftime("%d")
       %tbody
         - @feed_items.each do |feed_item|
-          %tr{ class: "#{'success' if feed_item.working? }" "#{'active' if feed_item.done? }" }
+          %tr{ class: "#{'success' if feed_item.working? }" "#{'active' if feed_item.done? }", data: {"task-id": feed_item.id } }
             %td
               = link_to feed_item.content, edit_project_task_path(@project, feed_item)
             %td
-              = feed_item.planed_time
+              %input.planed_time{ type: "text", value: feed_item.planed_time }
             %td
               -if feed_item.not_started?
                 = link_to "開始", project_task_start_path(@project, feed_item), method: :start, class: "btn btn-primary btn-sm"

@@ -258,16 +258,24 @@ aside {
     color: #eee;
     text-align: center;
   }
-  .content {
-    min-width: 140px;
+  thead {
+    .content {
+      min-width: 140px;
+    }
+    .planed_time {
+      min-width: 50px;
+    }
+    .status {
+      min-width: 50px;
+    }
+    .day {
+      min-width: 50px;
+    }
   }
-  .planed_time {
-    min-width: 50px;
-  }
-  .status {
-    min-width: 50px;
-  }
-  .day {
-    min-width: 50px;
+  tbody {
+    .planed_time {
+      border: none;
+      background: none;
+    }
   }
 }
