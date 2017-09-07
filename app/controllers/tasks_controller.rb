@@ -66,6 +66,12 @@ class TasksController < ApplicationController
     end
   end
 
+  def sort
+    binding.pry
+    @project = Project.find(params[:project_id])
+    @tasks = @project.tasks
+  end
+
   private
 
     def task_params

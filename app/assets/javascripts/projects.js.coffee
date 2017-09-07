@@ -11,5 +11,10 @@ $ ->
   $('input.planed_time').on "change", ->
     alert "!"
 
-  $('.sortable').sortable();
+  $('.sortable').sortable update: (event, ui) ->
+    $.ajax (document.URL + "/task/sort"),
+      type: "POST",
+      dateType: "script",
+      data: {"id": "3"}
+
   $('.sortable').disableSelection();

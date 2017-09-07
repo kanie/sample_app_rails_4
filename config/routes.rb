@@ -4,6 +4,9 @@ SampleApp::Application.routes.draw do
       post 'start'
       post 'finish'
     end
+    resource :task do
+      post 'sort'
+    end
   end
 
   resources :users do
