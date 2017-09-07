@@ -16,5 +16,6 @@
 //= require turbolinks
 //= require _honoka
 //= require jquery.tablefix.min
+//= require jquery-ui.min
 //= require_tree .
 //= require dropzone
