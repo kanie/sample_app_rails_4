@@ -15,6 +15,9 @@ $ ->
     $.ajax (document.URL + "/task/sort"),
       type: "POST",
       dateType: "script",
-      data: {"id": "3"}
+      data: {
+        "task-id": $(ui.item[0]).attr("data-task-id")
+        "order": ui.item[0].sectionRowIndex
+      }
 
   $('.sortable').disableSelection();
