@@ -67,9 +67,22 @@ class TasksController < ApplicationController
   end
 
   def sort
-    binding.pry
-    @project = Project.find(params[:project_id])
-    @tasks = @project.tasks
+    i = 0
+    @tasks.each do |task|
+      # 移動したタスクにはparams[:order]を当てる
+      if task.id == params[:task_id].to_i
+        task.order = params[:order].to_i
+        task.save
+        next
+      end
+
+      # params[:order]より大きい場合はparams[:order]と被らないように+1する
+      task.order = (i < params[:order].to_i ? i : i + 1)
+      task.save
+      i += 1
+    end
+
+    redirect_to project_path(@project)
   end
 
   private

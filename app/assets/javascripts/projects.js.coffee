@@ -16,7 +16,7 @@ $ ->
       type: "POST",
       dateType: "script",
       data: {
-        "task-id": $(ui.item[0]).attr("data-task-id")
+        "task_id": $(ui.item[0]).attr("data-task-id")
         "order": ui.item[0].sectionRowIndex
       }
 
