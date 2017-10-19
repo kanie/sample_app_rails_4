@@ -25,13 +25,13 @@
               = link_to feed_item.content, edit_project_task_path(@project, feed_item)
             %td
               %input.planed_time{ type: "text", value: feed_item.planed_time }
-            %td
+            %td.status
               -if feed_item.not_started?
                 = link_to "開始", project_task_start_path(@project, feed_item), method: :start, class: "btn btn-primary btn-sm"
               -elsif feed_item.working?
                 = link_to "完了", project_task_finish_path(@project, feed_item), method: :finish, class: "btn btn-primary btn-sm"
               -else
-                = link_to "済み", project_task_finish_path(@project, feed_item), method: :finish, class: "btn btn-primary btn-sm"
+                済
             - (@project.start_date..(@project.start_date + 60)).select{ |d| (1..5).include?(d.wday) }.each do |d|
               %td
                 = feed_item.dailies.find_by(the_date: d).try(:planed_time)
