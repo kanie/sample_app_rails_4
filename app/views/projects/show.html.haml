@@ -12,6 +12,8 @@
         %tr
           %th.content
             = "内容"
+          %th.user
+            = "担当者"
           %th.planed_time
             = "予定"
           %th.status
@@ -23,6 +25,8 @@
           %tr{ class: "#{'success' if feed_item.working? }" "#{'active' if feed_item.done? }", data: {"task-id": feed_item.id } }
             %td
               = link_to feed_item.content, edit_project_task_path(@project, feed_item)
+            %td
+              = feed_item.user.name
             %td
               %input.planed_time{ type: "text", value: feed_item.planed_time }
             %td.status
@@ -41,23 +45,9 @@
             %td
               = f.text_field :content
             %td
+            %td
               = f.number_field :planed_time
             %td
               .actions
                 = f.submit '追加', { class: "btn btn-primary btn-sm" }
-            %td
-            %td
-            %td
-            %td
-            %td
-            %td
-            %td
-            %td
-            %td
-            %td
-            %td
-            %td
-            %td
-            %td
-            %td
-            %td
+

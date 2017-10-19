@@ -89,7 +89,7 @@ class TasksController < ApplicationController
     end
 
     def task_params
-      params.require(:task).permit(:content, :id, :status, :planed_time, :actual_time)
+      params.require(:task).permit(:content, :id, :status, :planed_time, :actual_time, :user_id)
     end
 
     def correct_user

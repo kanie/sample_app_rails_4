@@ -9,7 +9,11 @@
   .field
     = f.label :content
     = f.text_field :content
+  .field
     = f.label :planed_time
     = f.number_field :planed_time
+  .field
+    = f.label :user
+    = f.collection_select :user_id, User.all, :id, :name
   .actions
     = f.submit '作成する', {class: "btn btn-large btn-primary"}
