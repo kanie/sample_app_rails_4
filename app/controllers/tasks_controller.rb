@@ -92,7 +92,7 @@ class TasksController < ApplicationController
       total_last_time = task_times.present? ? task_times.last.sum{ |task_time| task_time[:time] } : 0
       # 当日の合計が上限に達している場合、翌日以降に追加する
       if total_last_time == 0 or total_last_time == 300
-        add_div_mod_times(task, task_times)
+        add_div_mod_times(task.id, task.planed_time, task_times)
       # 当日の合計が上限に達していない場合、当日に追加する
       else
         # タスクの時間を全部追加すると上限を超える場合
@@ -100,8 +100,7 @@ class TasksController < ApplicationController
           # 超えない分だけ当日に追加し、超える分は翌日以降に追加する
           this_time = MAX_TIME - total_last_time
           task_times.last << { id: task.id, time: this_time }
-          task.planed_time -= this_time
-          add_div_mod_times(task, task_times)
+          add_div_mod_times(task.id, task.planed_time - this_time, task_times)
         # 上限を超えない場合
         else
           # 当日に追加する
@@ -131,13 +130,12 @@ class TasksController < ApplicationController
 
     # 最大時間で分割してタスクを追加する
     # MAX_TIME = 300
-    # task = {id: 1, planed_time: 720}
-    # task_times = {}
+    # task_id = 1, planed_time = 720, task_times = {}
     # の場合、720 ÷ 300 = 2あまり120なので、300を2回、余った120を1回追加するので、戻り値は以下の通り
     # task_times = [[ { id: 1, time: 300 } ], [ { id: 1, time: 300 } ], [ { id: 1, time: 120 } ]]
-    def add_div_mod_times(task, task_times)
-      div, mod = task.planed_time.divmod(MAX_TIME)
-      div.times{ |i| task_times << [ { id: task.id, time: MAX_TIME } ] }
-      task_times << [ { id: task.id, time: mod } ]
+    def add_div_mod_times(task_id, planed_time, task_times)
+      div, mod = planed_time.divmod(MAX_TIME)
+      div.times{ |i| task_times << [ { id: task_id, time: MAX_TIME } ] }
+      task_times << [ { id: task_id, time: mod } ]
     end
 end
