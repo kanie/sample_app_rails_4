@@ -91,7 +91,7 @@ class TasksController < ApplicationController
       binding.pry
       total_last_time = task_times.present? ? task_times.last.sum{ |task_time| task_time[:time] } : 0
       # 当日の合計が上限に達している場合、翌日以降に追加する
-      if total_last_time == 0 || total_last_time == 300
+      if total_last_time == 0 || total_last_time == MAX_TIME
         add_div_mod_times(task.id, task.planed_time, task_times)
       # 当日の合計が上限に達していない場合、当日に追加する
       else
