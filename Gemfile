@@ -17,6 +17,8 @@ gem 'erb2haml'
 gem 'dropzonejs-rails'
 gem 'jquery-turbolinks'
 gem 'aasm'
+gem 'business_time'
+gem 'holiday_jp'
 
 group :development, :test do
   gem 'sqlite3'
