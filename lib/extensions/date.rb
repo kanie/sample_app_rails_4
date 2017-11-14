@@ -1,9 +1,13 @@
 class Date
+  def business_dates(count)
+    arr = [self.bussiness_date? ? self : self.next_business_date]
+    arr << arr.last.next_business_date until arr.size == count
+    arr
+  end
+
   def next_business_date
     d = self.next
-    until d.bussiness_date? do
-      d = d.next
-    end
+    d = d.next until d.bussiness_date?
     d
   end
 

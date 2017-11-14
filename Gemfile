@@ -1,24 +1,24 @@
-source 'https://rubygems.org'
-ruby '2.3.4'
+source "https://rubygems.org"
+ruby "2.3.4"
 #ruby-gemset=railstutorial_rails_4_0
 
-gem 'rails', '4.2.8'
-gem 'bootstrap-sass', '2.3.2.0'
-gem 'sprockets', '2.11.0'
-gem 'bcrypt-ruby', '3.1.2'
-gem 'faker', '1.1.2'
-gem 'will_paginate', '3.0.4'
-gem 'bootstrap-will_paginate', '0.0.9'
-gem 'rake', '< 11.0'
-gem 'carrierwave'
-gem 'rmagick'
-gem 'haml-rails'
-gem 'erb2haml'
-gem 'dropzonejs-rails'
-gem 'jquery-turbolinks'
-gem 'aasm'
-gem 'business_time'
-gem 'holiday_jp'
+gem "rails", "4.2.8"
+gem "bootstrap-sass", "2.3.2.0"
+gem "sprockets", "2.11.0"
+gem "bcrypt-ruby", "3.1.2"
+gem "faker", "1.1.2"
+gem "will_paginate", "3.0.4"
+gem "bootstrap-will_paginate", "0.0.9"
+gem "rake", "< 11.0"
+gem "carrierwave"
+gem "rmagick"
+gem "haml-rails"
+gem "erb2haml"
+gem "dropzonejs-rails"
+gem "jquery-turbolinks"
+gem "aasm"
+gem "business_time"
+gem "holiday_jp"
 
 group :development, :test do
   gem 'sqlite3'
