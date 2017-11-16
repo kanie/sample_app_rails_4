@@ -87,11 +87,10 @@ class TasksController < ApplicationController
   MAX_TIME = 300.freeze
 
   def calculate
-    task_times = @tasks.each_with_object([]) do |task, task_times|
-      binding.pry
-      total_last_time = task_times.present? ? task_times.last.sum{ |task_time| task_time[:time] } : 0
+    task_times = @tasks.order(:order).each_with_object([]) do |task, task_times|
+      total_last_time = task_times.present? ? task_times.last.sum { |task_time| task_time[:time] } : 0
       # 当日の合計が上限に達している場合、翌日以降に追加する
-      if total_last_time == 0 || total_last_time == MAX_TIME
+      if [0, MAX_TIME].include?(total_last_time)
         add_div_mod_times(task.id, task.planed_time, task_times)
       # 当日の合計が上限に達していない場合、当日に追加する
       else
@@ -106,6 +105,17 @@ class TasksController < ApplicationController
           # 当日に追加する
           task_times.last << { id: task.id, time: task.planed_time }
         end
+      end
+    end
+
+   Daily.destroy_all(task_id: @tasks.map(&:id))
+    task_timeses = task_times.zip(@project.start_date.business_dates(task_times.size))
+    task_timeses.each do |task_times, date|
+      task_times.each do |task_time|
+        daily = Daily.create(
+          the_date: date, task_id: task_time[:id], planed_time: task_time[:time]
+        )
+        daily.save
       end
     end
   end
@@ -137,6 +147,5 @@ class TasksController < ApplicationController
       div, mod = planed_time.divmod(MAX_TIME)
       div.times{ |i| task_times << [ { id: task_id, time: MAX_TIME } ] }
       task_times << [ { id: task_id, time: mod } ] unless mod.zero?
-      end
     end
 end
