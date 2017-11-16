@@ -6,7 +6,7 @@ SampleApp::Application.routes.draw do
     end
     resource :task do
       post 'sort'
-      patch 'calculate'
+      post 'calculate'
     end
   end
 
