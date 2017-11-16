@@ -84,10 +84,16 @@ class TasksController < ApplicationController
     format.js { render :success }
   end
 
-  MAX_TIME = 300.freeze
+  MAX_TIME = 300
 
   def calculate
-    task_times = @tasks.order(:order).each_with_object([]) do |task, task_times|
+    create_dalies(task_times)
+    redirect_to project_path(@project)
+  end
+
+  private
+  def task_times
+    @tasks.order(:order).each_with_object([]) do |task, task_times|
       total_last_time = task_times.present? ? task_times.last.sum { |task_time| task_time[:time] } : 0
       # 当日の合計が上限に達している場合、翌日以降に追加する
       if [0, MAX_TIME].include?(total_last_time)
@@ -107,8 +113,10 @@ class TasksController < ApplicationController
         end
       end
     end
+  end
 
-   Daily.destroy_all(task_id: @tasks.map(&:id))
+  def create_dalies(task_times)
+    Daily.destroy_all(task_id: @tasks.map(&:id))
     task_timeses = task_times.zip(@project.start_date.business_dates(task_times.size))
     task_timeses.each do |task_times, date|
       task_times.each do |task_time|
@@ -120,32 +128,31 @@ class TasksController < ApplicationController
     end
   end
 
-  private
-    def set_project
-      @project = Project.find(params[:project_id])
-    end
+  def set_project
+    @project = Project.find(params[:project_id])
+  end
 
-    def set_tasks
-      @tasks = @project.tasks.order(:order)
-    end
+  def set_tasks
+    @tasks = @project.tasks.order(:order)
+  end
 
-    def task_params
-      params.require(:task).permit(:content, :id, :status, :planed_time, :actual_time, :user_id)
-    end
+  def task_params
+    params.require(:task).permit(:content, :id, :status, :planed_time, :actual_time, :user_id)
+  end
 
-    def correct_user
-      @task = current_user.tasks.find_by(id: params[:id])
-      redirect_to root_url if @task.nil?
-    end
+  def correct_user
+    @task = current_user.tasks.find_by(id: params[:id])
+    redirect_to root_url if @task.nil?
+  end
 
-    # 最大時間で分割してタスクを追加する
-    # MAX_TIME = 300
-    # task_id = 1, planed_time = 720, task_times = {}
-    # の場合、720 ÷ 300 = 2あまり120なので、300を2回、余った120を1回追加するので、戻り値は以下の通り
-    # task_times = [[ { id: 1, time: 300 } ], [ { id: 1, time: 300 } ], [ { id: 1, time: 120 } ]]
-    def add_div_mod_times(task_id, planed_time, task_times)
-      div, mod = planed_time.divmod(MAX_TIME)
-      div.times{ |i| task_times << [ { id: task_id, time: MAX_TIME } ] }
-      task_times << [ { id: task_id, time: mod } ] unless mod.zero?
-    end
+  # 最大時間で分割してタスクを追加する
+  # MAX_TIME = 300
+  # task_id = 1, planed_time = 720, task_times = {}
+  # の場合、720 ÷ 300 = 2あまり120なので、300を2回、余った120を1回追加するので、戻り値は以下の通り
+  # task_times = [[ { id: 1, time: 300 } ], [ { id: 1, time: 300 } ], [ { id: 1, time: 120 } ]]
+  def add_div_mod_times(task_id, planed_time, task_times)
+    div, mod = planed_time.divmod(MAX_TIME)
+    div.times { |i| task_times << [{ id: task_id, time: MAX_TIME }] }
+    task_times << [{ id: task_id, time: mod }] unless mod.zero?
+  end
 end
