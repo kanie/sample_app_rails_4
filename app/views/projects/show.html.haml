@@ -8,7 +8,6 @@
 
   = link_to "自動計算", calculate_project_task_path(@project), { method: "post", class: "btn btn-primary pull-right" }
 
-
 - if @feed_items.any?
   .scroll_range
     %table.table.table-bordered{id: "task_table"}
@@ -24,6 +23,7 @@
           - (@project.start_date..(@project.start_date + 60)).select{ |d| (1..5).include?(d.wday) }.each do |d|
             %th.day
               = d.strftime("%d")
+              = d.youbi
       %tbody.sortable
         - @feed_items.each do |feed_item|
           %tr{ class: "#{'success' if feed_item.working? }" "#{'active' if feed_item.done? }", data: {"task-id": feed_item.id } }
