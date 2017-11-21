@@ -8,7 +8,7 @@
     - if feed_item.working?
       = link_to "完了", project_task_finish_path(@project, feed_item), method: :finish, class: "btn btn-primary btn-sm"
   %td
-    = link_to "削除", project_task_path(@project, feed_item), method: :delete, data: { confirm: "本当に削除しますか？" }, title: feed_item.content, class: "btn btn-primary btn-sm"
+    / = link_to "削除", project_task_path(@project, feed_item), method: :delete, data: { confirm: "本当に削除しますか？" }, title: feed_item.content, class: "btn btn-primary btn-sm"
   %td
   %td
   %td
