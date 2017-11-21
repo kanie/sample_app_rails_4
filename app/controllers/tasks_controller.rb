@@ -79,7 +79,6 @@ class TasksController < ApplicationController
       task.save
       i += 1
     end
-    calculate
 
     format.js { render :success }
   end
