@@ -20,9 +20,10 @@
           %th.planed_time
             = "予定"
           %th.status
-          - (@project.start_date..(@project.start_date + 60)).select{ |d| (1..5).include?(d.wday) }.each do |d|
+          - @project.term.each do |d|
             %th.day
               = d.strftime("%d")
+              %br
               = d.youbi
       %tbody.sortable
         - @feed_items.each do |feed_item|
@@ -30,9 +31,9 @@
             %td
               = link_to feed_item.content, edit_project_task_path(@project, feed_item)
             %td
-              = feed_item.user.name
-            %td
-              %input.planed_time{ type: "text", value: feed_item.planed_time }
+              = collection_select :task, :user, User.all, :id, :name, { selected: feed_item.user.id }, class: "select_user_field"
+            %td.planed_time
+              %input.planed_time_field{ type: "text", value: feed_item.planed_time }
             %td.status
               -if feed_item.not_started?
                 = link_to "開始", project_task_start_path(@project, feed_item), method: :start, class: "btn btn-primary btn-sm"
@@ -40,18 +41,17 @@
                 = link_to "完了", project_task_finish_path(@project, feed_item), method: :finish, class: "btn btn-primary btn-sm"
               -else
                 済
-            - (@project.start_date..(@project.start_date + 60)).select{ |d| (1..5).include?(d.wday) }.each do |d|
-              %td
+            - @project.term.each do |d|
+              %td.day
                 = feed_item.dailies.find_by(the_date: d).try(:planed_time)
-                = feed_item.dailies.find_by(the_date: d).try(:actual_time)
-        %tr
-          = form_for @task, url: project_tasks_path(@project) do |f|
-            %td
-              = f.text_field :content
-            %td
-            %td
-              = f.number_field :planed_time
-            %td
-              .actions
-                = f.submit '追加', { class: "btn btn-primary btn-sm" }
+        / %tr
+        /   = form_for @task, url: project_tasks_path(@project) do |f|
+        /     %td
+        /       = f.text_field :content
+        /     %td
+        /     %td
+        /       = f.number_field :planed_time
+        /     %td
+        /       .actions
+        /         = f.submit '追加', { class: "btn btn-primary btn-sm" }
 

@@ -268,22 +268,32 @@ aside {
     }
     .planed_time {
       min-width: 50px;
+      max-width: 50px;
     }
     .status {
       min-width: 50px;
     }
     .day {
-      min-width: 50px;
+      min-width: 30px;
+      max-width: 30px;
     }
   }
   tbody {
     .planed_time {
+      min-width: 50px;
+      max-width: 50px;
+    }
+    .planed_time_field {
       border: none;
       background: none;
       text-align: right;
     }
     .status {
       text-align: center;
+    }
+    .day {
+      min-width: 30px;
+      max-width: 30px;
     }
   }
 }
