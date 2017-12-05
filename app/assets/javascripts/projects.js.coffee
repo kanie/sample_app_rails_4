@@ -8,24 +8,26 @@ $ ->
     fixRows: 1
   }
 
-  $("input.planed_time").on "change", ->
-    task_id = $($(this).parent().parent()[0]).attr("data-task-id")
-    $.ajax (document.URL + "/tasks/#{task_id}"),
-      type: "PATCH",
-      dateType: "script",
-      data: {
-        task: {
-          planed_time: $(this)[0].value
-        }
-      }
-
   $(".sortable").sortable update: (event, ui) ->
     $.ajax (document.URL + "/task/sort"),
       type: "POST",
       dateType: "script",
       data: {
-        "task_id": $(ui.item[0]).attr("data-task-id")
-        "order": ui.item[0].sectionRowIndex
+        task_id: $(ui.item[0]).attr("data-task-id")
+        order: ui.item[0].sectionRowIndex
       }
 
   $(".sortable").disableSelection();
+
+  $("input.planed_time_field").on "change", ->
+    update(this, { task: { planed_time: $(this)[0].value } })
+
+  $(".select_user_field").on "change", ->
+    update(this, { task: { user_id: $(this).val() } })
+
+  update = (element, data) ->
+    task_id = $($(element).parent().parent()[0]).attr("data-task-id")
+    $.ajax (document.URL + "/tasks/#{task_id}"),
+      type: "PATCH",
+      dateType: "script",
+      data: data
