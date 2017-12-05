@@ -80,7 +80,9 @@ class TasksController < ApplicationController
       i += 1
     end
 
-    format.js { render :success }
+    respond_to do |format|
+      format.js { render :success }
+    end
   end
 
   MAX_TIME = 300
