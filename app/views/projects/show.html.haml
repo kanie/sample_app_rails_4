@@ -8,6 +8,7 @@
 
   = link_to "自動計算", calculate_project_task_path(@project), { method: "post", class: "btn btn-primary pull-right" }
 
+= render 'edit_form'
 - if @feed_items.any?
   .scroll_range
     %table.table.table-bordered{id: "task_table"}
