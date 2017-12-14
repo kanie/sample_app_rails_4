@@ -31,3 +31,17 @@ $ ->
       type: "PATCH",
       dateType: "script",
       data: data
+
+  $(".feed_item_content").on "click", (event) ->
+    $(".edit_panel").remove()
+    $(this).after("<div class=\"panel edit_panel\" style=\"top: #{event.pageY - 180}px; left: #{event.pageX - 60}px;\">
+<div class=\"panel-body\">
+パネルの内容
+パネルの内容
+パネルの内容
+パネルの内容
+パネルの内容
+パネルの内容
+</div>
+</div>
+")

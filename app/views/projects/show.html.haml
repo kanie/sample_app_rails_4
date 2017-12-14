@@ -8,7 +8,6 @@
 
   = link_to "自動計算", calculate_project_task_path(@project), { method: "post", class: "btn btn-primary pull-right" }
 
-= render 'edit_form'
 - if @feed_items.any?
   .scroll_range
     %table.table.table-bordered{id: "task_table"}
@@ -30,7 +29,8 @@
         - @feed_items.each do |feed_item|
           %tr{ class: "#{'success' if feed_item.working? }" "#{'active' if feed_item.done? }", data: {"task-id": feed_item.id } }
             %td
-              = link_to feed_item.content, edit_project_task_path(@project, feed_item)
+              / = link_to feed_item.content, edit_project_task_path(@project, feed_item)
+              = link_to feed_item.content, "#", class: "feed_item_content"
             %td
               = collection_select :task, :user, User.all, :id, :name, { selected: feed_item.user.id }, class: "select_user_field"
             %td.planed_time
