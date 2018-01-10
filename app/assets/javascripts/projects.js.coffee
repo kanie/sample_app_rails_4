@@ -34,7 +34,6 @@ $ ->
 
   $(".feed_item_label").on "click", ->
     $(".edit_panel").remove()
-    console.log($(this)[0].innerText)
     $(this).after("<div class=\"panel edit_panel\">
       <div class=\"panel-body\">#{ $(this)[0].innerText }<br>#{ $(this).parent().find(".feed_item_content").val() }
       </div>
