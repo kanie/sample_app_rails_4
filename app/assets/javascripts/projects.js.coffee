@@ -32,16 +32,10 @@ $ ->
       dateType: "script",
       data: data
 
-  $(".feed_item_content").on "click", (event) ->
+  $(".feed_item_title").on "click", ->
     $(".edit_panel").remove()
-    $(this).after("<div class=\"panel edit_panel\" style=\"top: #{event.pageY - 180}px; left: #{event.pageX - 60}px;\">
-<div class=\"panel-body\">
-パネルの内容
-パネルの内容
-パネルの内容
-パネルの内容
-パネルの内容
-パネルの内容
-</div>
-</div>
-")
+    console.log($(this).parent().find(".feed_item_content"))
+    $(this).after("<div class=\"panel edit_panel\">
+      <div class=\"panel-body\">#{ $(this).parent().find(".feed_item_content").val() }
+      </div>
+    </div>")

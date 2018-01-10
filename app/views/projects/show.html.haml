@@ -13,8 +13,8 @@
     %table.table.table-bordered{id: "task_table"}
       %thead
         %tr
-          %th.content
-            = "内容"
+          %th.title
+            = "件名"
           %th.user
             = "担当者"
           %th.planed_time
@@ -29,8 +29,11 @@
         - @feed_items.each do |feed_item|
           %tr{ class: "#{'success' if feed_item.working? }" "#{'active' if feed_item.done? }", data: {"task-id": feed_item.id } }
             %td
-              / = link_to feed_item.content, edit_project_task_path(@project, feed_item)
-              = link_to feed_item.content, "#", class: "feed_item_content"
+              / = link_to feed_item.title, edit_project_task_path(@project, feed_item)
+              / = link_to feed_item.title, "#", class: "feed_item_title"
+              %label.feed_item_title
+                = feed_item.title
+                %input{ type: "hidden", value: feed_item.content, class: "feed_item_content" }
             %td
               = collection_select :task, :user, User.all, :id, :name, { selected: feed_item.user.id }, class: "select_user_field"
             %td.planed_time
@@ -56,3 +59,11 @@
         /       .actions
         /         = f.submit '追加', { class: "btn btn-primary btn-sm" }
 
+.panel.edit_panel
+  .panel-body
+    パネルの内容
+    パネルの内容
+    パネルの内容
+    パネルの内容
+    パネルの内容
+    パネルの内容
