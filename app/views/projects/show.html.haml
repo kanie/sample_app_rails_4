@@ -31,9 +31,9 @@
             %td
               / = link_to feed_item.title, edit_project_task_path(@project, feed_item)
               / = link_to feed_item.title, "#", class: "feed_item_title"
-              %label.feed_item_title
+              %label.feed_item_label
                 = feed_item.title
-                %input{ type: "hidden", value: feed_item.content, class: "feed_item_content" }
+              %input{ type: "hidden", value: feed_item.content, class: "feed_item_content" }
             %td
               = collection_select :task, :user, User.all, :id, :name, { selected: feed_item.user.id }, class: "select_user_field"
             %td.planed_time
