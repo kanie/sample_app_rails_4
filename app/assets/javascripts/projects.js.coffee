@@ -25,8 +25,14 @@ $ ->
   $(".select_user_field").on "change", ->
     update(this, { task: { user_id: $(this).val() } })
 
+  $(document).on "click", ".task_update_button", ->
+    update(this, { task: {
+      title: $(this).parent().find(".edit_title").val(),
+      content: $(this).parent().find(".edit_content").val()
+    } })
+
   update = (element, data) ->
-    task_id = $($(element).parent().parent()[0]).attr("data-task-id")
+    task_id = $($(element).parents("tr")[0]).attr("data-task-id")
     $.ajax (document.URL + "/tasks/#{task_id}"),
       type: "PATCH",
       dateType: "script",
@@ -34,7 +40,12 @@ $ ->
 
   $(".feed_item_label").on "click", ->
     $(".edit_panel").remove()
-    $(this).after("<div class=\"panel edit_panel\">
-      <div class=\"panel-body\">#{ $(this)[0].innerText }<br>#{ $(this).parent().find(".feed_item_content").val() }
-      </div>
-    </div>")
+    title_label = $("<label>", { text: "件名" })
+    title = $("<input>", { type: "text", value: $(this)[0].innerText, class: "form-control edit_title" })
+    content_label = $("<label>", { text: "内容" })
+    content = $("<textarea>", { rows: 5, text: $(this).parent().find(".feed_item_content").val(), class: "form-control edit_content" })
+    button = $("<a>", { class: "btn btn-primary task_update_button" }).append("更新")
+    panel_body = $("<div>", { class: "panel-body form-group" })
+    panel_body.append(title_label, title, content_label, content, button)
+    edit_panel = $("<div>", { class: "panel edit_panel" }).append(panel_body)
+    $(this).after(edit_panel)
