@@ -47,22 +47,3 @@
             - @project.term.each do |d|
               %td.day
                 = feed_item.dailies.find_by(the_date: d).try(:planed_time)
-        / %tr
-        /   = form_for @task, url: project_tasks_path(@project) do |f|
-        /     %td
-        /       = f.text_field :content
-        /     %td
-        /     %td
-        /       = f.number_field :planed_time
-        /     %td
-        /       .actions
-        /         = f.submit '追加', { class: "btn btn-primary btn-sm" }
-
-.panel.edit_panel
-  .panel-body
-    パネルの内容
-    パネルの内容
-    パネルの内容
-    パネルの内容
-    パネルの内容
-    パネルの内容
