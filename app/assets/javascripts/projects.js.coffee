@@ -26,11 +26,13 @@ $ ->
     update(this, { task: { user_id: $(this).val() } })
 
   $(document).on "click", ".task_update_button", ->
+    title = $(this).parent().find(".edit_title").val()
     update(this, { task: {
-      title: $(this).parent().find(".edit_title").val(),
+      title: title,
       content: $(this).parent().find(".edit_content").val()
     } })
-    location.reload()
+    $($(this).parents("tr")[0]).find(".feed_item_label")[0].innerHTML = title
+    $('.edit_panel').fadeOut()
 
   update = (element, data) ->
     task_id = $($(element).parents("tr")[0]).attr("data-task-id")
