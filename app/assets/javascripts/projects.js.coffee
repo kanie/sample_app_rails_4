@@ -30,6 +30,7 @@ $ ->
       title: $(this).parent().find(".edit_title").val(),
       content: $(this).parent().find(".edit_content").val()
     } })
+    location.reload()
 
   update = (element, data) ->
     task_id = $($(element).parents("tr")[0]).attr("data-task-id")
@@ -45,7 +46,13 @@ $ ->
     content_label = $("<label>", { text: "内容" })
     content = $("<textarea>", { rows: 5, text: $(this).parent().find(".feed_item_content").val(), class: "form-control edit_content" })
     button = $("<a>", { class: "btn btn-primary task_update_button" }).append("更新")
+    panel_close_button = $("<button>", { type: "button", class: "close", text: "×", id: "edit_panel_close" })
+    panel_header = $("<div>", { class: "panel-heading" })
+    panel_header.append(panel_close_button)
     panel_body = $("<div>", { class: "panel-body form-group" })
     panel_body.append(title_label, title, content_label, content, button)
-    edit_panel = $("<div>", { class: "panel edit_panel" }).append(panel_body)
+    edit_panel = $("<div>", { class: "panel edit_panel" }).append(panel_header, panel_body)
     $(this).after(edit_panel)
+
+  $(document).on "click", "#edit_panel_close", ->
+    $('.edit_panel').fadeOut()
