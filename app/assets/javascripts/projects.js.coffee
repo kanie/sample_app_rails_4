@@ -31,30 +31,40 @@ $ ->
       title: title,
       content: $(this).parent().find(".edit_content").val()
     } })
-    $($(this).parents("tr")[0]).find(".feed_item_label")[0].innerHTML = title
+    tasks_row(this).find(".feed_item_label")[0].innerHTML = title
     $('.edit_panel').fadeOut()
 
   update = (element, data) ->
-    task_id = $($(element).parents("tr")[0]).attr("data-task-id")
+    task_id = tasks_row(element).attr("data-task-id")
     $.ajax (document.URL + "/tasks/#{task_id}"),
       type: "PATCH",
       dateType: "script",
       data: data
 
+  tasks_row = (element) ->
+    $($(element).parents(".task_row")[0])
+
   $(".feed_item_label").on "click", ->
-    $(".edit_panel").remove()
-    title_label = $("<label>", { text: "件名" })
-    title = $("<input>", { type: "text", value: $(this)[0].innerText, class: "form-control edit_title" })
-    content_label = $("<label>", { text: "内容" })
-    content = $("<textarea>", { rows: 5, text: $(this).parent().find(".feed_item_content").val(), class: "form-control edit_content" })
-    button = $("<a>", { class: "btn btn-primary task_update_button" }).append("更新")
-    panel_close_button = $("<button>", { type: "button", class: "close", text: "×", id: "edit_panel_close" })
-    panel_header = $("<div>", { class: "panel-heading" })
-    panel_header.append(panel_close_button)
-    panel_body = $("<div>", { class: "panel-body form-group" })
-    panel_body.append(title_label, title, content_label, content, button)
-    edit_panel = $("<div>", { class: "panel edit_panel" }).append(panel_header, panel_body)
-    $(this).after(edit_panel)
+    task_id = tasks_row(this).attr("data-task-id")
+    $.ajax (document.URL + "/tasks/#{task_id}.json"),
+      type: "GET",
+      dateType: "script",
+      data: {task_id: task_id },
+      context: this
+      success: (task) ->
+        $(".edit_panel").remove()
+        title_label = $("<label>", { text: "件名" })
+        title = $("<input>", { type: "text", value: task.title, class: "form-control edit_title" })
+        content_label = $("<label>", { text: "内容" })
+        content = $("<textarea>", { rows: 5, text: task.content, class: "form-control edit_content" })
+        button = $("<a>", { class: "btn btn-primary task_update_button" }).append("更新")
+        panel_close_button = $("<button>", { type: "button", class: "close", text: "×", id: "edit_panel_close" })
+        panel_header = $("<div>", { class: "panel-heading" })
+        panel_header.append(panel_close_button)
+        panel_body = $("<div>", { class: "panel-body form-group" })
+        panel_body.append(title_label, title, content_label, content, button)
+        edit_panel = $("<div>", { class: "panel edit_panel" }).append(panel_header, panel_body)
+        $(this).after(edit_panel)
 
   $(document).on "click", "#edit_panel_close", ->
     $('.edit_panel').fadeOut()

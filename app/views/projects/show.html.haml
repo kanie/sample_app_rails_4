@@ -27,13 +27,12 @@
               = d.youbi
       %tbody.sortable
         - @feed_items.each do |feed_item|
-          %tr{ class: "#{'success' if feed_item.working? }" "#{'active' if feed_item.done? }", data: {"task-id": feed_item.id } }
-            %td
+          %tr{ class: "task_row #{'success' if feed_item.working? }" "#{'active' if feed_item.done? }", data: {"task-id": feed_item.id } }
+            %td.feed_item_title
               / = link_to feed_item.title, edit_project_task_path(@project, feed_item)
               / = link_to feed_item.title, "#", class: "feed_item_title"
               %label.feed_item_label
                 = feed_item.title
-              %input{ type: "hidden", value: feed_item.content, class: "feed_item_content" }
             %td
               = collection_select :task, :user, User.all, :id, :name, { selected: feed_item.user.id }, class: "select_user_field"
             %td.planed_time

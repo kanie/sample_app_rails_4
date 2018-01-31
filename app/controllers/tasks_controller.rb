@@ -1,8 +1,9 @@
 class TasksController < ApplicationController
-  before_action :signed_in_user, only: [:create, :destroy]
+  before_action :signed_in_user, only: %i[create destroy]
   before_action :correct_user,   only: :destroy
   before_action :set_project
-  before_action :set_tasks, only: [:sort, :calculate]
+  before_action :set_tasks, only: %i[sort calculate]
+  before_action :set_task, only: %i[show start finish]
 
   def create
     @task = current_user.tasks.build(task_params)
@@ -40,8 +41,13 @@ class TasksController < ApplicationController
     redirect_to project_path(@project)
   end
 
+  def show
+    respond_to do |format|
+      format.json { render json: @task.to_json }
+    end
+  end
+
   def start
-    @task = Task.find_by(id: params[:task_id])
     @task.start
     if @task.save
       flash[:success] = "開始しました"
@@ -53,7 +59,6 @@ class TasksController < ApplicationController
   end
 
   def finish
-    @task = Task.find_by(id: params[:task_id])
     @task.finish
     if @task.save
       flash[:success] = "完了しました"
@@ -135,6 +140,10 @@ class TasksController < ApplicationController
 
   def set_tasks
     @tasks = @project.tasks.order(:order)
+  end
+
+  def set_task
+    @task = Task.find_by(id: params[:task_id])
   end
 
   def task_params
