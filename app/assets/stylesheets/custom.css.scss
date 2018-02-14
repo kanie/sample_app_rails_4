@@ -252,7 +252,7 @@ aside {
   overflow: auto;
 }
 
-#task_table {
+.task_table {
   th {
     background-color: rgba(34, 34, 34, .8);
     color: #eee;
@@ -279,6 +279,9 @@ aside {
     }
   }
   tbody {
+    .feed_item_title {
+      word-wrap: break-word;
+    }
     .planed_time {
       min-width: 50px;
       max-width: 50px;

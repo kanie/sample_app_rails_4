@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ ->
-  $("#task_table").tablefix {
+  $(".task_table").tablefix {
     height: 740
     width: 1200
     fixRows: 1

@@ -18,9 +18,9 @@
 
 - if @feed_items.any?
   .tab-content
-    .tab-pane.active#planed
+    .tab-pane.active
       .scroll_range
-        %table.table.table-bordered{id: "task_table"}
+        %table.table.table-bordered.task_table
           %thead
             %tr
               %th.title
@@ -39,8 +39,6 @@
             - @feed_items.each do |feed_item|
               %tr{ class: "task_row #{'success' if feed_item.working? }" "#{'active' if feed_item.done? }", data: {"task-id": feed_item.id } }
                 %td.feed_item_title
-                  / = link_to feed_item.title, edit_project_task_path(@project, feed_item)
-                  / = link_to feed_item.title, "#", class: "feed_item_title"
                   %label.feed_item_label
                     = feed_item.title
                 %td
@@ -57,5 +55,3 @@
                 - @project.term.each do |d|
                   %td.day
                     = feed_item.dailies.find_by(the_date: d).try(:planed_time)
-    .tab-pane#actual
-    .tab-pane#diff
