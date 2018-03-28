@@ -231,9 +231,6 @@ input {
     border-top: 1px solid #e8e8e8;
   }
 }
-.title {
-  display: block;
-}
 /*.timestamp {
   color: $grayLight;
 }*/
@@ -253,12 +250,15 @@ aside {
 }
 
 .task_table {
-  th {
-    background-color: rgba(34, 34, 34, .8);
-    color: #eee;
-    text-align: center;
-  }
   thead {
+    tr {
+      th {
+        background-color: rgba(34, 34, 34, .8);
+        color: #eee;
+        text-align: center;
+        vertical-align: middle;
+      }
+    }
     .title {
       min-width: 140px;
       min-height: 65px;
