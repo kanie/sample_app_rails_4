@@ -10,11 +10,11 @@
 
 %ul.nav.nav-tabs
   %li.active
-    = link_to "予定", "#planed", { data: { toggle: "tab" } }
+    = link_to "予定", "#planed", { data: { toggle: "tab" }, class: "planed_tab" }
   %li
-    = link_to "実績", "#actual", { data: { toggle: "tab" } }
+    = link_to "実績", "#actual", { data: { toggle: "tab" }, class: "actual_tab" }
   %li
-    = link_to "予実差", "#diff", { data: { toggle: "tab" } }
+    = link_to "予実差", "#diff", { data: { toggle: "tab" }, class: "diff_tab" }
 
 - if @feed_items.any?
   .tab-content
@@ -27,8 +27,8 @@
                 = "件名"
               %th.user
                 = "担当者"
-              %th.planed_time
-                = "予定"
+              %th.time
+                = "時間"
               %th.status
               - @project.term.each do |d|
                 %th.day
@@ -43,8 +43,10 @@
                     = feed_item.title
                 %td
                   = collection_select :task, :user, User.all, :id, :name, { selected: feed_item.user.id }, class: "select_user_field"
-                %td.planed_time
-                  %input.planed_time_field{ type: "text", value: feed_item.planed_time }
+                %td.time
+                  %input.time_field.planed{ type: "text", value: feed_item.planed_time }
+                  .actual
+                    = feed_item.actual_time
                 %td.status
                   -if feed_item.not_started?
                     = link_to "開始", project_task_start_path(@project, feed_item), method: :start, class: "btn btn-primary btn-sm"
@@ -54,4 +56,8 @@
                     済
                 - @project.term.each do |d|
                   %td.day
-                    = feed_item.dailies.find_by(the_date: d).try(:planed_time)
+                    .planed
+                      = feed_item.dailies.find_by(the_date: d).try(:planed_time)
+                    %input.time_field.actual{ type: "text", value: feed_item.dailies.find_by(the_date: d).try(:actual_time) }
+                    .diff
+                      = diff(feed_item.dailies.find_by(the_date: d))

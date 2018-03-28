@@ -19,7 +19,7 @@ $ ->
 
   $(".sortable").disableSelection();
 
-  $("input.planed_time_field").on "change", ->
+  $(".time .time_field").on "change", ->
     update(this, { task: { planed_time: $(this)[0].value } })
 
   $(".select_user_field").on "change", ->
@@ -68,3 +68,18 @@ $ ->
 
   $(document).on "click", "#edit_panel_close", ->
     $('.edit_panel').fadeOut()
+
+  $(".planed_tab").on "click", ->
+    $(".planed").show()
+    $(".actual").hide()
+    $(".diff").hide()
+
+  $(".actual_tab").on "click", ->
+    $(".planed").hide()
+    $(".actual").show()
+    $(".diff").hide()
+
+  $(".diff_tab").on "click", ->
+    $(".planed").hide()
+    $(".actual").hide()
+    $(".diff").show()

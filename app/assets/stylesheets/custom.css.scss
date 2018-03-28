@@ -266,7 +266,7 @@ aside {
     .user {
       min-width: 80px;
     }
-    .planed_time {
+    .time {
       min-width: 50px;
       max-width: 50px;
     }
@@ -282,11 +282,11 @@ aside {
     .feed_item_title {
       word-wrap: break-word;
     }
-    .planed_time {
+    .time {
       min-width: 50px;
       max-width: 50px;
     }
-    .planed_time_field {
+    .time_field {
       border: none;
       background: none;
       text-align: right;
@@ -299,6 +299,10 @@ aside {
       max-width: 30px;
     }
   }
+}
+
+.actual, .diff {
+  display: none;
 }
 
 .edit_panel {
