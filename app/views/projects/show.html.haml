@@ -31,9 +31,9 @@
                 = "時間"
               %th.status
               - @project.term.each do |d|
-                %th.day
+                %th.day<>
                   = d.strftime("%d")
-                  %br
+                  %br<>
                   = d.youbi
           %tbody.sortable
             - @feed_items.each do |feed_item|
