@@ -56,8 +56,8 @@
                     済
                 - @project.term.each do |d|
                   %td.day
-                    .planed
-                      = feed_item.dailies.find_by(the_date: d).try(:planed_time)
-                    %input.time_field.actual{ type: "text", value: feed_item.dailies.find_by(the_date: d).try(:actual_time) }
+                    - daily = feed_item.dailies.find_by(the_date: d)
+                    %input.time_field.planed{ type: "text", value: daily.try(:planed_time) }
+                    %input.time_field.actual{ type: "text", value: daily.try(:actual_time) }
                     .diff
-                      = diff(feed_item.dailies.find_by(the_date: d))
+                      = diff(daily)
