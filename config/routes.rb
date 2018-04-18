@@ -3,6 +3,7 @@ SampleApp::Application.routes.draw do
     resources :tasks do
       post 'start'
       post 'finish'
+      resources :dailies, only: %i[update]
     end
     resource :task do
       post 'sort'
@@ -16,9 +17,9 @@ SampleApp::Application.routes.draw do
       post :upload_image
     end
   end
-  resources :sessions,      only: [:new, :create, :destroy]
+  resources :sessions,      only: %i[new create destroy]
 
-  resources :relationships, only: [:create, :destroy]
+  resources :relationships, only: %i[create destroy]
   root to: 'static_pages#home'
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'

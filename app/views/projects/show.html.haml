@@ -55,8 +55,8 @@
                   -else
                     済
                 - @project.term.each do |d|
-                  %td.day
-                    - daily = feed_item.dailies.find_by(the_date: d)
+                  - daily = feed_item.dailies.find_by(the_date: d)
+                  %td.day{ data: {"daily-id": daily.try(:id) } }
                     %input.time_field.planed{ type: "text", value: daily.try(:planed_time) }
                     %input.time_field.actual{ type: "text", value: daily.try(:actual_time) }
                     .diff

@@ -20,21 +20,27 @@ $ ->
   $(".sortable").disableSelection();
 
   $(".time .time_field").on "change", ->
-    update(this, { task: { planed_time: $(this)[0].value } })
+    update_task(this, { task: { planed_time: $(this)[0].value } })
 
   $(".select_user_field").on "change", ->
-    update(this, { task: { user_id: $(this).val() } })
+    update_task(this, { task: { user_id: $(this).val() } })
 
   $(document).on "click", ".task_update_button", ->
     title = $(this).parent().find(".edit_title").val()
-    update(this, { task: {
+    update_task(this, { task: {
       title: title,
       content: $(this).parent().find(".edit_content").val()
     } })
     tasks_row(this).find(".feed_item_label")[0].innerHTML = title
     $('.edit_panel').fadeOut()
 
-  update = (element, data) ->
+  $(".day .time_field.planed").on "change", ->
+    update_daily(this, { daily: { planed_time: $(this)[0].value } })
+
+  $(".day .time_field.actual").on "change", ->
+    update_daily(this, { daily: { actual_time: $(this)[0].value } })
+
+  update_task = (element, data) ->
     task_id = tasks_row(element).attr("data-task-id")
     $.ajax (document.URL + "/tasks/#{task_id}"),
       type: "PATCH",
@@ -43,6 +49,15 @@ $ ->
 
   tasks_row = (element) ->
     $($(element).parents(".task_row")[0])
+
+  update_daily = (element, data) ->
+    task_id = tasks_row(element).attr("data-task-id")
+    daily_id = $($(element).parents(".day")[0]).attr("data-daily-id")
+    $.ajax (document.URL + "/tasks/#{task_id}/dailies/#{daily_id}"),
+      type: "PATCH",
+      dateType: "script",
+      data: data
+
 
   $(".feed_item_label").on "click", ->
     task_id = tasks_row(this).attr("data-task-id")
