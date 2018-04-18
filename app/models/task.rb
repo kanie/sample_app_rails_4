@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: tasks
+#
+#  id          :integer          not null, primary key
+#  content     :string
+#  user_id     :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#  status      :string
+#  project_id  :integer
+#  planed_time :integer
+#  actual_time :integer
+#  order       :integer
+#  title       :string
+#
+
 class Task < ActiveRecord::Base
   include AASM
 

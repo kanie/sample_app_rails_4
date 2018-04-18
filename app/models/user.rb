@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  name            :string
+#  email           :string
+#  created_at      :datetime
+#  updated_at      :datetime
+#  password_digest :string
+#  remember_token  :string
+#  admin           :boolean
+#  image           :string
+#
+
 class User < ActiveRecord::Base
   has_many :tasks, dependent: :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy

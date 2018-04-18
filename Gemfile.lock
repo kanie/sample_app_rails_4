@@ -43,6 +43,9 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    annotate (2.7.2)
+      activerecord (>= 3.2, < 6.0)
+      rake (>= 10.4, < 13.0)
     arel (6.0.4)
     bcrypt-ruby (3.1.2)
     bootstrap-sass (2.3.2.0)
@@ -293,6 +296,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
+  annotate
   bcrypt-ruby (= 3.1.2)
   bootstrap-sass (= 2.3.2.0)
   bootstrap-will_paginate (= 0.0.9)
